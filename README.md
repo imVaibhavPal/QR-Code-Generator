@@ -1,70 +1,68 @@
 # 📱 QR Code Generator
 
-A simple Python application that generates QR codes from URLs or text with customizable colors and image formats.
+A simple and customizable **QR Code Generator** built with **Python**.  
+This application allows users to generate QR codes from URLs or text with customizable colors, multiple image formats, and a user-selected save location.
 
 ---
 
 ## ✨ Features
 
-- Generate QR codes from URLs or text
-- Custom file name
-- PNG and JPG support
-- Custom QR color
-- Custom background color
-- Choose where to save the QR code
-- Automatic image preview
-- Error handling
+- 🔗 Generate QR codes from URLs or plain text
+- 🎨 Customize QR code color
+- 🖼️ Customize background color
+- 📄 Save as **PNG** or **JPG**
+- 💾 Choose where to save the QR code
+- 👀 Automatic preview after generation
+- ⚠️ Basic error handling for invalid inputs
+
+---
+
+## 🛠️ Tech Stack
+
+- **Python 3**
+- **qrcode**
+- **Pillow**
+- **Tkinter**
 
 ---
 
 ## 📂 Project Structure
 
-```
+```text
 QR-Code-Generator/
 │
-├── screenshots/
-│   ├── terminal.png
-│   └── generated_qr.png
-│
 ├── qr_generator.py
-├── requirements.txt
 ├── README.md
-├── LICENSE
-└── .gitignore
+├── requirements.txt
+├── .gitignore
+└── screenshots/
+    ├── terminal.png
+    └── generated_qr.png
 ```
-
----
-
-## 🛠 Technologies Used
-
-- Python
-- qrcode
-- Pillow
-- Tkinter
 
 ---
 
 ## 🚀 Installation
 
-Clone the repository:
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/QR-Code-Generator.git
+git clone https://github.com/imVaibhavPal/QR-Code-Generator.git
 ```
 
-Go into the project folder:
+### 2. Navigate to the Project Folder
 
 ```bash
 cd QR-Code-Generator
 ```
 
-Install dependencies:
+### 3. Install Required Libraries
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the application:
+### 4. Run the Program
 
 ```bash
 python qr_generator.py
@@ -72,51 +70,109 @@ python qr_generator.py
 
 ---
 
+## 💻 How It Works
+
+1. Enter a URL or text.
+2. Enter a filename.
+3. Choose PNG or JPG format.
+4. Select QR color.
+5. Select background color.
+6. Choose a location to save the QR code.
+7. The QR code is generated and opened automatically.
+
+---
+
 ## 📸 Screenshots
 
 ### Terminal
 
-Add a screenshot named **terminal.png** inside the `screenshots` folder.
+> Add a screenshot named `terminal.png` inside the `screenshots` folder.
 
-![Terminal](screenshots/terminal.png)
+![Terminal Screenshot](screenshots/terminal.png)
 
 ---
 
 ### Generated QR Code
 
-Add a screenshot named **generated_qr.png** inside the `screenshots` folder.
+> Add a screenshot named `generated_qr.png` inside the `screenshots` folder.
 
-![Generated QR](screenshots/generated_qr.png)
+![Generated QR Code](screenshots/generated_qr.png)
 
 ---
 
 ## 📌 Example
 
-**Input**
+### Input
 
-```
+```text
 URL:
 https://github.com
+
+Filename:
+github
+
+Format:
+png
+
+QR Color:
+blue
+
+Background:
+white
 ```
 
-**Output**
+### Output
 
-```
+```text
 QR Code Generated Successfully!
 ```
 
-A QR code image is saved in the location selected by the user.
+A QR code image is generated and saved to the selected location.
 
 ---
 
-## 🔮 Future Improvements
+## 📈 Future Improvements
 
-- GUI using Tkinter
-- Streamlit Web App
-- Logo embedding
-- QR Code Scanner
-- Batch QR Generator
-- QR History using SQLite
+- Add logo support in the center of the QR code
+- Build a GUI using Tkinter
+- Create a Streamlit web version
+- Batch QR code generation
+- QR code scanner
+- QR history using SQLite
+- More customization options
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a new branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push the branch
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
 
 ---
 
@@ -124,6 +180,11 @@ A QR code image is saved in the location selected by the user.
 
 **Vaibhav Kumar Pal**
 
-B.Tech CSE (AI & ML)
+- 🎓 B.Tech CSE (AI & ML), VIT Bhopal University
+- 💻 Python Developer | AI & ML Enthusiast
 
-VIT Bhopal University
+### Connect with Me
+
+- GitHub: https://github.com/imVaibhavPal
+- LinkedIn: https://www.linkedin.com/in/vaibhav-kumar-pal-955aa6293/
+
