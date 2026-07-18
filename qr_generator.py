@@ -1,16 +1,21 @@
+import os
+import sys
 import qrcode
 from tkinter import Tk, filedialog
 
-print("=" * 50)
-print("         QR Code Generator")
-print("=" * 50)
+# Valid colors
+VALID_QR_COLORS = ["black", "blue", "red", "green", "purple"]
+VALID_BG_COLORS = ["white", "yellow", "pink", "cyan"]
 
-try:
-    # -----------------------------
-    # Get user input
-    # -----------------------------
+
+def get_user_input():
+    """Collect and validate user input."""
+
+    print("=" * 50)
+    print("            QR Code Generator")
+    print("=" * 50)
+
     data = input("Enter URL or Text: ").strip()
-
     if not data:
         raise ValueError("Input cannot be empty!")
 
@@ -19,50 +24,68 @@ try:
         filename = "qrcode"
 
     image_format = input("Choose image format (png/jpg): ").strip().lower()
+
     if image_format not in ["png", "jpg"]:
         print("Invalid format! Using PNG.")
         image_format = "png"
 
     print("\nAvailable QR Colors:")
-    print("black, blue, red, green, purple")
+    print(", ".join(VALID_QR_COLORS))
 
     qr_color = input("QR Color (default: black): ").strip().lower()
-    if not qr_color:
+
+    if qr_color not in VALID_QR_COLORS:
+        print("Invalid QR color! Using black.")
         qr_color = "black"
 
     print("\nAvailable Background Colors:")
-    print("white, yellow, pink, cyan")
+    print(", ".join(VALID_BG_COLORS))
 
     background_color = input("Background Color (default: white): ").strip().lower()
-    if not background_color:
+
+    if background_color not in VALID_BG_COLORS:
+        print("Invalid background color! Using white.")
         background_color = "white"
 
-    # -----------------------------
-    # Choose Save Location
-    # -----------------------------
+    return (
+        data,
+        filename,
+        image_format,
+        qr_color,
+        background_color
+    )
+
+
+def choose_save_location(filename, image_format):
+    """Open save dialog."""
+
     root = Tk()
     root.withdraw()
     root.attributes("-topmost", True)
 
-    file_path = filedialog.asksaveasfilename(
-        title="Save QR Code",
-        initialfile=filename,
-        defaultextension=f".{image_format}",
-        filetypes=[
-            ("PNG Image", "*.png"),
-            ("JPEG Image", "*.jpg")
-        ]
-    )
-
-    root.destroy()
+    try:
+        file_path = filedialog.asksaveasfilename(
+            title="Save QR Code",
+            initialfile=filename,
+            defaultextension=f".{image_format}",
+            filetypes=[
+                ("PNG Image", "*.png"),
+                ("JPEG Image", "*.jpg")
+            ]
+        )
+    finally:
+        root.destroy()
 
     if not file_path:
         print("Save cancelled.")
-        exit()
+        sys.exit()
 
-    # -----------------------------
-    # Create QR Code
-    # -----------------------------
+    return file_path
+
+
+def generate_qr(data, qr_color, background_color):
+    """Generate QR Code."""
+
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_H,
@@ -73,30 +96,58 @@ try:
     qr.add_data(data)
     qr.make(fit=True)
 
-    qr_image = qr.make_image(
+    return qr.make_image(
         fill_color=qr_color,
         back_color=background_color
     )
 
-    # Convert to RGB only for JPG
-    if image_format == "jpg":
-        qr_image = qr_image.convert("RGB")
 
-    # -----------------------------
-    # Save QR Code
-    # -----------------------------
-    qr_image.save(file_path)
+def main():
 
-    print("\n" + "=" * 50)
-    print("✅ QR Code Generated Successfully!")
-    print("=" * 50)
-    print("📁 Location :", file_path)
-    print("📄 File Name:", filename)
-    print("🎨 QR Color :", qr_color)
-    print("🖼 Background:", background_color)
+    try:
+        (
+            data,
+            filename,
+            image_format,
+            qr_color,
+            background_color
+        ) = get_user_input()
 
-    # Open the generated image
-    qr_image.show()
+        file_path = choose_save_location(
+            filename,
+            image_format
+        )
 
-except Exception as error:
-    print("\n❌ Error:", error)
+        qr_image = generate_qr(
+            data,
+            qr_color,
+            background_color
+        )
+
+        # Convert to RGB if saving as JPG
+        extension = os.path.splitext(file_path)[1].lower()
+
+        if extension == ".jpg":
+            qr_image = qr_image.convert("RGB")
+
+        qr_image.save(file_path)
+
+        print("\n" + "=" * 50)
+        print("✅ QR Code Generated Successfully!")
+        print("=" * 50)
+        print(f"📁 Saved At      : {file_path}")
+        print(f"📄 File Name     : {os.path.basename(file_path)}")
+        print(f"🎨 QR Color      : {qr_color}")
+        print(f"🖼 Background     : {background_color}")
+
+        try:
+            qr_image.show()
+        except Exception:
+            print("Unable to preview image.")
+
+    except Exception as error:
+        print("\n Error:", error)
+
+
+if __name__ == "__main__":
+    main()

@@ -88,7 +88,7 @@ python qr_generator.py
 
 > Add a screenshot named `terminal.png` inside the `screenshots` folder.
 
-![Terminal Output](screenshots/terminal.png)
+![Terminal Output](Screenshots/terminal.png)
 
 ---
 
@@ -96,7 +96,7 @@ python qr_generator.py
 
 > Add a screenshot named `generated_qr.png` inside the `screenshots` folder.
 
-![Generated QR Code](screenshots/generated_qr.png)
+![Generated QR Code](Screenshots/generated_qr.png)
 ---
 
 ## 📌 Example
